@@ -1,0 +1,53 @@
+# aspell files
+*.bak
+
+# Dangerous Home Directory Stuff
+.bash_history
+conf
+.gnupg/*
+investigations/*
+*.ini
+.ssh/*
+
+# Editors
+*.idea
+*.swp
+.vscode
+
+# Environments
+.env
+
+# macOS
+.DS_Store
+
+# Makefile targets
+.build
+.deps-test
+.develop
+.lint
+.requirements.venv
+.static
+.venv/
+build/
+dist/
+venv
+wheels
+
+# Python
+__pycache__/
+.mypy_cache/
+.pytest_cache
+.python-version
+*.egg-info
+*.eggs
+
+# Python Coverage.py
+.coverage
+report.html
+
+# Robot Framework
+log.html
+output.xml
+
+# Setuptools generated files
+_version.py

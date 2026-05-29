@@ -1,0 +1,15 @@
+# This file configures `borg` when this repository is used as a source.
+# This file should only be present in a template repository.
+
+# If this file is present in a child repository, it should be deleted.
+
+[template]
+files = [
+    ".github/workflows/pr_reminder.yml",
+    ".github/workflows/cleanup.yml",
+    "CODE_OF_CONDUCT.md",
+    "SECURITY.md",
+]
+[generate.gitattributes]
+# Include all template files above
+include_template_files = true
