@@ -1,6 +1,6 @@
 ## About
 
-Easy to deploy Azure Cloud Function to expose the Splunk HTTP Event Collector (HEC API) as a webhook endpoint for applications that do not have native integration with Splunk. This can be used where it is not possible or unfeasible to directly send events to Splunk, such as 3rd party systems and legacy applications.
+Easy to deploy Azure Function App to expose the Splunk HTTP Event Collector (HEC API) as a webhook endpoint for applications that do not have native integration with Splunk. This can be used where it is not possible or unfeasible to directly send events to Splunk, such as 3rd party systems and legacy applications.
 
 This open-source tool is intended to be deployed for any Azure & Splunk Enterprise 6.3.0+ or Splunk Cloud Platform environment, sample data and endpoint declarations are available below for deploying within the UIUC environment.
 
@@ -31,7 +31,7 @@ End-of-Support dates of this product are 2028 April.
 End-of-Life was decided upon based on these dependencies:
 
 - Node.js 24.16.0 LTS (2028 April 30)
-- Azure Cloud Function v4 Runtime (end-of-life TBD)
+- Azure Functions v4 Runtime (end-of-life TBD)
 
 # Getting Started
 
