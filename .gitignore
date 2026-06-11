@@ -1,3 +1,6 @@
+# node
+node_modules/
+
 # aspell files
 *.bak
 
@@ -16,6 +19,7 @@ investigations/*
 
 # Environments
 .env
+local.settings.json
 
 # macOS
 .DS_Store
