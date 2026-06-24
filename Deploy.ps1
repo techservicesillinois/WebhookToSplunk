@@ -191,6 +191,9 @@ Process {
         npm run build --silent
         Write-Host "Publishing function app code..."
         func azure functionapp publish $functionAppName --subscription $SubscriptionId
+        If ($LASTEXITCODE -ne 0) {
+            throw $LASTEXITCODE
+        }
         Pop-Location
     }
     Catch {
