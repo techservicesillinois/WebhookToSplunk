@@ -4,9 +4,10 @@
     "FUNCTIONS_WORKER_RUNTIME": "node",
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "SPLUNK_HEC_URL": "https://http-inputs-illinois.splunkcloud.com/services/collector",
-    "SPLUNK_HEC_TOKEN": "your-splunk-hec-token",
-    "SPLUNK_INDEX": "your-splunk-index",
-    "WEBHOOK_SENDER_NAME": "YourAppNameThatSendsOutgoingWebhooks",
+    "SPLUNK_HEC_TOKEN": "",
+    "SPLUNK_INDEX": "",
+    "WEBHOOK_SENDER_NAME": "",
+    "WEBHOOK_SENDER_SOURCE": "",
     "WEBHOOK_SENDER_SOURCETYPE": "json"
   }
 }

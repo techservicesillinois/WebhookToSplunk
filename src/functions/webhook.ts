@@ -24,7 +24,7 @@ export const webhook = (
   request: HttpRequest,
   context: InvocationContext,
 ): Promise<HttpResponseInit> => {
-  return matchesWebhookUrlSecrets(request.url)
+  return matchesWebhookUrlSecrets(request)
     .then(
       () => request.json(),
       (e) => {
@@ -45,7 +45,9 @@ export const webhook = (
       (splunkRes: HTTPEventResponse) => {
         //reject if splunk returns any error code or no code
         if (splunkRes.code !== 0) {
-          context.error("bad event payload, cannot be ingested by splunk");
+          context.error(
+            `bad event payload, cannot be ingested by splunk, code ${splunkRes.code}`,
+          );
           return Promise.reject(HTTPBadRequestError);
         }
         //successful event

@@ -4,6 +4,9 @@ export interface HTTPEventBody {
   host: string;
   sourcetype: string;
   source: string;
+  fields?: {
+    forwardedBy?: string;
+  };
   event: Object;
 }
 
@@ -14,10 +17,11 @@ export interface HTTPEventResponse {
 
 const HEC_URL = process.env.SPLUNK_HEC_URL;
 const HEC_TOKEN = process.env.SPLUNK_HEC_TOKEN;
-const SPLUNK_HOST =
-  process.env.WEBSITE_SITE_NAME ?? "test-webhooktosplunk.local";
+const SPLUNK_HOST = process.env.WEBHOOK_SENDER_NAME;
 const SPLUNK_SOURCETYPE = process.env.WEBHOOK_SENDER_SOURCETYPE;
-const SPLUNK_SOURCE = process.env.WEBHOOK_SENDER_NAME;
+const SPLUNK_SOURCE = process.env.WEBHOOK_SENDER_SOURCE;
+const SPLUNK_FORWARDER =
+  process.env.WEBSITE_SITE_NAME ?? "test-webhooktosplunk.local";
 
 /**
  * Sends a serializable JSON object as an event to Splunk HTTP Event Collector
@@ -50,6 +54,9 @@ export const sendHttpEvent = (event: unknown): Promise<HTTPEventResponse> => {
     host: SPLUNK_HOST,
     sourcetype: SPLUNK_SOURCETYPE,
     source: SPLUNK_SOURCE,
+    fields: {
+      forwardedBy: SPLUNK_FORWARDER,
+    },
     event,
   };
 
@@ -63,14 +70,7 @@ export const sendHttpEvent = (event: unknown): Promise<HTTPEventResponse> => {
     body: JSON.stringify(body),
   };
 
-  /*
-  //fake api request
-  console.log("simulated request: ", webrequest);
-  return Promise.resolve({
-    code: 0,
-    text: "simulated request Ok",
-  } as HTTPEventResponse);
-  */
+  console.log(webrequest);
 
   //return HEC api request promise
   return fetch(HEC_URL, webrequest)
