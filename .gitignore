@@ -1,3 +1,6 @@
+# Sensitive deployment script output
+DEPLOYMENT_DETAILS/
+
 # node
 node_modules/
 
