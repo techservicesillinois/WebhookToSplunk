@@ -8,9 +8,9 @@ This open-source tool is intended to be deployed for any Azure & Splunk Enterpri
 
 For data sensitivity, see [Data Classification](https://www.cybersecurity.illinois.edu/data-classification/). Substitute (Your Application) with the application which will be sending webhook payloads to this application.
 
-| Data Store         | Data Type                 | Sensitivity                       | Notes                                                                                                        |
-| ------------------ | ------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| (Your Application) | (data sent from your app) | (Appropriate Data Classification) | This application will injest data sent to it via webhook. Data is transmitted to on-premise Splunk instance. |
+| Data Store         | Data Type                 | Sensitivity                       | Notes                                                                                                           |
+| ------------------ | ------------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| (Your Application) | (data sent from your app) | (Appropriate Data Classification) | This application will injest data sent to it via webhook. Data is transmitted to Splunk endpoint defined below. |
 
 ## Endpoint Connections
 
@@ -18,8 +18,8 @@ This application's public endpoint URL is configured during deployment to your o
 
 | Endpoint                                                        | Purpose                         | Stage | Access               | Contact                                                                                  |
 | --------------------------------------------------------------- | ------------------------------- | ----- | -------------------- | ---------------------------------------------------------------------------------------- |
-| (Function URL)                                                  | Webhook receiver                | prod  | Inbound HTTPS, POST  | (Your Azure admin)                                                                       |
 | https://http-inputs-illinois.splunkcloud.com/services/collector | Splunk HTTP Event Collector API | prod  | Outbound HTTPS, POST | Splunk service team<br>[splunk-support@illinois.edu](mailto:splunk-support@illinois.edu) |
+| (Function URL)                                                  | Webhook receiver                | prod  | Inbound HTTPS, POST  | (Your Azure admin)                                                                       |
 
 ## Product Support
 
@@ -32,14 +32,16 @@ End-of-Life was decided upon based on these dependencies:
 
 - Node.js 24.16.0 LTS (2028 April 30)
 - Azure Functions v4 Runtime (end-of-life TBD)
+- Bicep resources schemas (varies per resource, TBD)
+- Splunk collector API (TBD)
 
 # Getting Started
 
 ## Software Prerequisites
 
-1. Install Node.js v24.16.0 LTS: [download archive](https://nodejs.org/en/download/archive/v24.16.0)
-2. Install Azure CLI: [microsoft learn article](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
-3. Install Azure Functions Core Tools: [microsoft learn article](https://learn.microsoft.com/en-us/azure/azure-functions/how-to-create-function-azure-cli?pivots=programming-language-csharp&tabs=windows%2Cbash%2Cazure-cli#prerequisites)
+1. Install Node.js v24.16.0 LTS: [Node Download Archive](https://nodejs.org/en/download/archive/v24.16.0)
+2. Install Azure CLI: [Microsoft Learn article](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
+3. Install Azure Functions Core Tools: [Microsoft Learn article](https://learn.microsoft.com/en-us/azure/azure-functions/how-to-create-function-azure-cli?pivots=programming-language-csharp&tabs=windows%2Cbash%2Cazure-cli#prerequisites)
 
 ## Basic Setup
 
@@ -87,19 +89,25 @@ cp local.settings.template.json local.settings.json
 }
 ```
 
-### 4. Run the deployment script
+### 4. Create an Azure Resource group
+
+See [Microsoft Learn article](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#create-resource-groups) for instructions.
+
+Record your Resource Group name for Step 5.
+
+### 5. Run the deployment script
+
+> [!IMPORTANT]
+> This script will require you to log into the Azure CLI tool, make sure to select the same subscription you created your Resource Group with in Step 4.
 
 Windows
 
 ```PowerShell
-pwsh .\Deploy.ps1
+pwsh .\Deploy.ps1 -ResourceGroup YourResourceGroupName
 ```
 
-Mac/Linux
-
-```bash
-bash ./Deploy.sh
-```
+> [!NOTE]
+> bash Deploy script for Linux/Mac has not been written yet
 
 > [!NOTE]
 > Execution of downloaded scripts may be disabled on your machine.
