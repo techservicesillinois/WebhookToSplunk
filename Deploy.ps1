@@ -188,6 +188,7 @@ Process {
     Write-Host "Building TypeScript..."
     Try {
         Push-Location $PSScriptRoot
+        npm install
         npm run build --silent
         Write-Host "Publishing function app code..."
         func azure functionapp publish $functionAppName --subscription $SubscriptionId
